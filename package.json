@@ -1,0 +1,31 @@
+{
+  "name": "google-docs-highlighter",
+  "version": "1.0.0",
+  "description": "Automatiza a identificação e marcação de textos entre documentos Google Docs",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "node src/test.js",
+    "setup": "node scripts/setup.js"
+  },
+  "keywords": ["google-docs", "automation", "highlighter", "n8n"],
+  "author": "Google Docs Highlighter",
+  "license": "MIT",
+  "dependencies": {
+    "googleapis": "^118.0.0",
+    "express": "^4.18.2",
+    "dotenv": "^16.0.3",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "morgan": "^1.10.0",
+    "helmet": "^7.0.0",
+    "express-rate-limit": "^6.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
