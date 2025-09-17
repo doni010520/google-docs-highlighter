@@ -1,33 +1,53 @@
-=const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 4000; // PORTA 4000
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
 
+const app = express();
+const PORT = process.env.PORT || 4000;
+
+// Middlewares
+app.use(cors());
 app.use(express.json());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
-
+// Rotas
 app.get('/', (req, res) => {
   res.json({
     name: 'Google Docs Highlighter',
     version: '1.0.0',
     status: 'online',
-    port: PORT
+    port: PORT,
+    endpoints: ['/status', '/health', '/auth', '/process']
+  });
+});
+
+app.get('/status', (req, res) => {
+  res.json({ 
+    status: 'online', 
+    configured: false,
+    port: PORT,
+    timestamp: new Date().toISOString()
   });
 });
 
 app.get('/health', (req, res) => {
-  res.send('OK');
+  res.status(200).send('OK');
 });
 
-app.get('/status', (req, res) => {
-  res.json({ status: 'online', port: PORT });
+app.get('/auth', (req, res) => {
+  res.json({
+    message: 'OAuth não configurado ainda',
+    info: 'Configure as credenciais do Google primeiro'
+  });
 });
 
+app.post('/process', (req, res) => {
+  res.json({
+    success: false,
+    message: 'Serviço não configurado completamente ainda'
+  });
+});
+
+// Iniciar servidor
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
